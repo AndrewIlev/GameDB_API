@@ -97,7 +97,6 @@ class MathGame(MathGameBase):
         orm_mode = True
 
 class InventoryBase(BaseModel):
-    player_id: int
     item_id: int
     quantity: Optional[int] = 1
 
