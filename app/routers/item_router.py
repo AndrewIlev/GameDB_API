@@ -21,7 +21,7 @@ def read_items(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
 @router.get("/{item_id}", response_model=schemas.Item)
 def read_item(item_id: int, db: Session = Depends(get_db)):
     db_item = crud.item.get_item(db, item_id)
-    if db_item is None:
+    if not db_item:
         raise HTTPException(status_code=404, detail="Item not found")
     return db_item
 
@@ -32,13 +32,14 @@ def create_item(item: schemas.ItemCreate, db: Session = Depends(get_db)):
 @router.put("/{item_id}", response_model=schemas.Item)
 def update_item(item_id: int, item: schemas.ItemCreate, db: Session = Depends(get_db)):
     db_item = crud.item.update_item(db, item_id, item)
-    if db_item is None:
+    if not db_item:
         raise HTTPException(status_code=404, detail="Item not found")
     return db_item
 
 @router.delete("/{item_id}", response_model=schemas.Item)
 def delete_item(item_id: int, db: Session = Depends(get_db)):
     db_item = crud.item.delete_item(db, item_id)
-    if db_item is None:
+    if not db_item:
         raise HTTPException(status_code=404, detail="Item not found")
     return db_item
+

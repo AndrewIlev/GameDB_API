@@ -64,6 +64,9 @@ class Inventory(Base):
     item_id = Column(Integer, ForeignKey("Item.item_id"), primary_key=True)
     quantity = Column(Integer, default=1)
 
+    player = relationship("Player", backref="inventories")
+    item = relationship("Item")
+
 class PlayerQuest(Base):
     __tablename__ = "PlayerQuest"
     player_id = Column(Integer, ForeignKey("Player.player_id"), primary_key=True)
