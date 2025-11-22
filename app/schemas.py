@@ -1,6 +1,7 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, EmailStr
 from typing import Optional
 
+# ------------------- Guild -------------------
 class GuildBase(BaseModel):
     name: str
     rating: Optional[int] = 0
@@ -10,9 +11,11 @@ class GuildCreate(GuildBase):
 
 class Guild(GuildBase):
     guild_id: int
+
     class Config:
         orm_mode = True
 
+# ------------------- Player -------------------
 class PlayerBase(BaseModel):
     login: str
     nickname: Optional[str] = None
@@ -26,9 +29,11 @@ class PlayerCreate(PlayerBase):
 
 class Player(PlayerBase):
     player_id: int
+
     class Config:
         orm_mode = True
 
+# ------------------- Quest -------------------
 class QuestBase(BaseModel):
     title: str
     description: Optional[str] = None
@@ -40,9 +45,11 @@ class QuestCreate(QuestBase):
 
 class Quest(QuestBase):
     quest_id: int
+
     class Config:
         orm_mode = True
 
+# ------------------- Item -------------------
 class ItemBase(BaseModel):
     name: str
     item_type: Optional[str] = None
@@ -54,9 +61,11 @@ class ItemCreate(ItemBase):
 
 class Item(ItemBase):
     item_id: int
+
     class Config:
         orm_mode = True
 
+# ------------------- Skill -------------------
 class SkillBase(BaseModel):
     name: str
     level: Optional[int] = 1
@@ -67,9 +76,11 @@ class SkillCreate(SkillBase):
 
 class Skill(SkillBase):
     skill_id: int
+
     class Config:
         orm_mode = True
 
+# ------------------- Achievement -------------------
 class AchievementBase(BaseModel):
     name: str
     description: Optional[str] = None
@@ -80,9 +91,11 @@ class AchievementCreate(AchievementBase):
 
 class Achievement(AchievementBase):
     achievement_id: int
+
     class Config:
         orm_mode = True
 
+# ------------------- MathGame -------------------
 class MathGameBase(BaseModel):
     match_date: Optional[str] = None
     match_type: Optional[str] = None
@@ -93,9 +106,11 @@ class MathGameCreate(MathGameBase):
 
 class MathGame(MathGameBase):
     match_id: int
+
     class Config:
         orm_mode = True
 
+# ------------------- Inventory -------------------
 class InventoryBase(BaseModel):
     item_id: int
     quantity: Optional[int] = 1
@@ -107,6 +122,7 @@ class Inventory(InventoryBase):
     class Config:
         orm_mode = True
 
+# ------------------- PlayerQuest -------------------
 class PlayerQuestBase(BaseModel):
     player_id: int
     quest_id: int
@@ -118,6 +134,7 @@ class PlayerQuest(PlayerQuestBase):
     class Config:
         orm_mode = True
 
+# ------------------- PlayerSkill -------------------
 class PlayerSkillBase(BaseModel):
     player_id: int
     skill_id: int
@@ -129,6 +146,7 @@ class PlayerSkill(PlayerSkillBase):
     class Config:
         orm_mode = True
 
+# ------------------- PlayerAchievement -------------------
 class PlayerAchievementBase(BaseModel):
     player_id: int
     achievement_id: int
@@ -140,6 +158,7 @@ class PlayerAchievement(PlayerAchievementBase):
     class Config:
         orm_mode = True
 
+# ------------------- PlayerMathGame -------------------
 class PlayerMathGameBase(BaseModel):
     player_id: int
     match_id: int
@@ -150,3 +169,30 @@ class PlayerMathGameCreate(PlayerMathGameBase):
 class PlayerMathGame(PlayerMathGameBase):
     class Config:
         orm_mode = True
+
+# ------------------- User -------------------
+class UserCreate(BaseModel):
+    username: str
+    email: EmailStr
+    password: str
+
+class UserLogin(BaseModel):
+    email: EmailStr
+    password: str
+
+class UserResponse(BaseModel):
+    id: int
+    username: str
+    email: EmailStr
+    role: str
+
+    class Config:
+        orm_mode = True
+
+# ------------------- Token -------------------
+class Token(BaseModel):
+    access_token: str
+    token_type: str
+
+class TokenData(BaseModel):
+    email: Optional[str] = None

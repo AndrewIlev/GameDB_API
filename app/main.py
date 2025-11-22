@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from app.database import Base, engine
+from app.routers import auth_router
 from app.routers import (
     player_router,
     guild_router,
@@ -24,3 +25,4 @@ app.include_router(quest_router.router)
 app.include_router(skill_router.router)
 app.include_router(mathgame_router.router)
 app.include_router(achievement_router.router)
+app.include_router(auth_router.router)

@@ -6,3 +6,9 @@ pytest
 pytest-asyncio
 httpx
 mysqlclient
+pymysql
+python-dotenv
+passlib[bcrypt]
+python-jose[cryptography]
+python-multipart
+email-validator
