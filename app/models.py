@@ -86,3 +86,13 @@ class PlayerMathGame(Base):
     __tablename__ = "PlayerMathGame"
     player_id = Column(Integer, ForeignKey("Player.player_id"), primary_key=True)
     match_id = Column(Integer, ForeignKey("MathGame.match_id"), primary_key=True)
+
+class User(Base):
+    __tablename__ = "User"
+
+    id = Column(Integer, primary_key=True, index=True)
+    username = Column(String(50), unique=True, nullable=False)
+    email = Column(String(255), unique=True, nullable=False)
+    password = Column(String(255), nullable=False)  
+    role = Column(String(20), default="USER")
+
